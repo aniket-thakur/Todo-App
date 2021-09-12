@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{%block content%}
+<div class = "container" >
+    <div class = "row my-3">
+        <div class ="col-12">
+            <h2 class = "text-center mt-2 mb-2 font-italic">Add your ToDo list here!!!</h2>
+            <form class="form-inline justify-content-center my-3"action = "{% url 'edit_todo' obj.pk %}" method = "POST">
+                {%csrf_token%}
+                <div class="form-group">
+                {{form.text_todo}}
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

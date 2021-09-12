@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class = "container" >
+    <div class = "row">
+        <div class = "col-12">
+            <h2 class = "text-center mt-2 mb-2 font-italic">Add your ToDo list here!!!</h2>
+        </div>
+    </div>
+
+    <div class ="row">
+        <div class ="col-12">
+            <form class="form-inline justify-content-center my-3"action = "add_todo/" method = "POST">
+                {%csrf_token%}
+                <div class="form-group">
+                  {{form.text_todo}}
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-success">Add</button>
+                </div>
+            </form>
+        </div>  
+            
+    </div>
+
+    <div class ="row my-3">
+        <div class ="col-12 table-responsive">
+            <table class="table">
+                <tbody>
+                    {%for todo in todo_list%}
+                    <tr>
+                        <td>
+                           <p> {{todo.text_todo}}</p>
+                            <p> <small> Added on: {{todo.added_date}}</small></p>
+                            <p class > <small> updated on: {{todo.update_date}}</small></p>
+                        </td>
+                        <td class="text-right">
+                        
+                            <a href="{% url 'edit_todo' todo.id%}" type="submit" class="mx-2 btn btn-success">Edit</button>
+                        </td>
+                        <td class=" text-left "> 
+                            <form method = "POST" action="{%url 'delete_todo' todo.id%}">
+                                {%csrf_token%}
+                                <button type="submit" class="mx-2 btn btn-danger">Delete</button>
+                            </form>
+                           
+                        </td>
+                    </tr>
+                    {%endfor%}
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}
